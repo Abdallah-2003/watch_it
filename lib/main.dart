@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:watch_it/core/networking/supabase_services.dart';
 import 'package:watch_it/core/routing/app_router.dart';
 import 'package:watch_it/core/routing/routes.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SupabaseServices.init();
   runApp(const WatchIt());
 }
 
