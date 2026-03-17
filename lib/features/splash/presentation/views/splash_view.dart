@@ -18,7 +18,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     Future.delayed(Duration(seconds: 2), () {
-      Navigator.pushNamed(context, AppRoutes.homeView);
+      Navigator.pushNamed(context, AppRoutes.layoutView);
     },);
     super.initState();
   }
