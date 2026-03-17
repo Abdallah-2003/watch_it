@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/core/routing/routes.dart';
 import 'package:watch_it/features/layout/presentation/views/layout_view.dart';
 import 'package:watch_it/features/splash/presentation/views/splash_view.dart';
-import 'package:watch_it/home_view.dart';
+import 'package:watch_it/features/home/presentation/views/home_view.dart';
 
 
 

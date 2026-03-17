@@ -1,4 +1,4 @@
-import 'package:watch_it/video_model.dart';
+import 'package:watch_it/features/home/data/model/video_model.dart';
 
 final List<VideoModel> videos = [
   VideoModel(

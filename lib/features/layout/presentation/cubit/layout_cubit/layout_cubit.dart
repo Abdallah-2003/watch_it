@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:watch_it/features/settings/presentation/views/settings_view.dart';
-import 'package:watch_it/home_view.dart';
+import 'package:watch_it/features/home/presentation/views/home_view.dart';
 
 part 'layout_state.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'package:watch_it/video_model.dart'; 
+import 'package:watch_it/features/home/data/model/video_model.dart'; 
 
 class VideoPlayerView extends StatefulWidget {
   final VideoModel video;
