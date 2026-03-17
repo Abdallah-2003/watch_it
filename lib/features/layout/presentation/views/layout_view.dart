@@ -18,30 +18,39 @@ class LayoutView extends StatelessWidget {
             body: context
                 .read<LayoutCubit>()
                 .views[context.read<LayoutCubit>().currentIndex],
-            bottomNavigationBar: Theme(
-              data: Theme.of(context).copyWith(
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
+            bottomNavigationBar: Container(
+              decoration: BoxDecoration(
+                boxShadow: [BoxShadow(
+                  color: AppColors.white.withValues(alpha: 0.3),
+                  blurRadius: 5,
+                  spreadRadius: 2
+                )]
               ),
-              child: BottomNavigationBar(
-                backgroundColor: AppColors.primaryDark,
-                currentIndex: context.read<LayoutCubit>().currentIndex,
-                onTap: (index) {
-                  context.read<LayoutCubit>().changeCurrentIndex(index);
-                },
-                selectedItemColor: AppColors.blueAccent,
-                unselectedItemColor: AppColors.lightText,
-
-                items: [
-                  BottomNavigationBarItem(
-                    label: AppStrings.home,
-                    icon: Icon(AppIcons.home),
-                  ),
-                  BottomNavigationBarItem(
-                    label: AppStrings.settings,
-                    icon: Icon(AppIcons.settings),
-                  ),
-                ],
+              child: Theme(
+                data: Theme.of(context).copyWith(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                ),
+                child: BottomNavigationBar(
+                  backgroundColor: AppColors.primaryDark,
+                  currentIndex: context.read<LayoutCubit>().currentIndex,
+                  onTap: (index) {
+                    context.read<LayoutCubit>().changeCurrentIndex(index);
+                  },
+                  selectedItemColor: AppColors.blueAccent,
+                  unselectedItemColor: AppColors.lightText,
+              
+                  items: [
+                    BottomNavigationBarItem(
+                      label: AppStrings.home,
+                      icon: Icon(AppIcons.home),
+                    ),
+                    BottomNavigationBarItem(
+                      label: AppStrings.settings,
+                      icon: Icon(AppIcons.settings),
+                    ),
+                  ],
+                ),
               ),
             ),
           );
