@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:watch_it/home_view.dart';
+import 'package:watch_it/core/routing/app_router.dart';
+import 'package:watch_it/core/routing/routes.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +18,8 @@ class WatchIt extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const HomeView(),
+      initialRoute: AppRoutes.splashView,
+      onGenerateRoute: AppRouter.generateRoute,
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/core/routing/routes.dart';
+import 'package:watch_it/features/splash/presentation/views/splash_view.dart';
 import 'package:watch_it/home_view.dart';
 
 
@@ -11,6 +12,13 @@ abstract class AppRouter {
         return MaterialPageRoute(
           builder: (context) {
             return const HomeView();
+          },
+        );
+
+      case AppRoutes.splashView:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const SplashView();
           },
         );
 
