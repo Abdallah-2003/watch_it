@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:watch_it/core/constant/app_colors.dart';
+import 'package:watch_it/features/home/presentation/views/widgets/video_item.dart';
 import 'package:watch_it/videos_list.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'package:watch_it/video_player_view.dart'; 
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -9,9 +9,9 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0F0F0F),
+      backgroundColor: AppColors.cardDark,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF0F0F0F),
+        backgroundColor: AppColors.cardDark,
         title: const Text(
           'Mr. Mohamed El Saka',
           style: TextStyle(
@@ -31,65 +31,8 @@ class HomeView extends StatelessWidget {
         itemCount: videos.length,
         itemBuilder: (context, index) {
           final video = videos[index];
-          final thumbnailUrl = YoutubePlayer.getThumbnail(videoId: video.id);
 
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => VideoPlayerView(video: video),
-                ),
-              );
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Image.network(
-                          thumbnailUrl,
-                          width: double.infinity,
-                          height: 200,
-                          fit: BoxFit.cover,
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Colors.black.withValues(alpha: 0.6),
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.play_arrow,
-                            color: Colors.white,
-                            size: 40,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    video.title,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.right,
-                    textDirection: TextDirection.rtl,
-                    maxLines: 2,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16
-                    ),
-                  )
-                ],
-              ),
-            ),
-          );
+          return VideoItem(videoModel: video,);
         },
       ),
     );
