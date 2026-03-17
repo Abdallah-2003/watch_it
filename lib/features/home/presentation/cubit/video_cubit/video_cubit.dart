@@ -8,9 +8,9 @@ class VideoCubit extends Cubit<VideoState> {
   final VideoRepo videoRepo;
   VideoCubit(this.videoRepo) : super(VideoInitial());
 
-  Future<void> getVideos(String id) async {
+  Future<void> getVideos() async {
     emit(VideoLoading());
-    final res = await videoRepo.getVideos(id);
+    final res = await videoRepo.getVideos();
     res.fold(
       (msg) => emit(VideoFailure(msg)),
       (videos) => emit(VideoSuccess(videos)),

@@ -5,9 +5,9 @@ import 'package:watch_it/features/home/data/model/video_model.dart';
 class VideoRepo {
   final supabase = Supabase.instance.client;
 
-  Future<Either<String, List<VideoModel>>> getVideos(String videoId) async {
+  Future<Either<String, List<VideoModel>>> getVideos() async {
     try {
-      final res = await supabase.from('videos').select().eq('id', videoId);
+      final res = await supabase.from('videos').select();
 
       List<VideoModel> videos = [];
       for (var video in res) {
