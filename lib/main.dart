@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:watch_it/core/constant/app_colors.dart';
 import 'package:watch_it/core/networking/supabase_services.dart';
 import 'package:watch_it/core/routing/app_router.dart';
 import 'package:watch_it/core/routing/routes.dart';

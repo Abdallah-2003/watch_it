@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:watch_it/core/constant/app_colors.dart';
+import 'package:watch_it/core/routing/routes.dart';
 import 'package:watch_it/features/home/data/repo/video_repo.dart';
 import 'package:watch_it/features/home/presentation/cubit/video_cubit/video_cubit.dart';
 import 'package:watch_it/features/home/presentation/views/widgets/video_item.dart';
@@ -57,7 +58,11 @@ class HomeView extends StatelessWidget {
                 ? ListView.builder(
                     itemCount: state.videos.length,
                     itemBuilder: (context, index) {
-                      return VideoItem(videoModel: state.videos[index]);
+                      return VideoItem(videoModel: state.videos[index],
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRoutes.videoView, arguments: state.videos[index]);
+                      },
+                      );
                     },
                   )
                 : SizedBox(),
