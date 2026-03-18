@@ -1,75 +1,65 @@
-import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
+import 'package:flutter/services.dart';
 import 'package:watch_it/core/constant/app_colors.dart';
 import 'package:watch_it/features/home/data/model/video_model.dart';
-
+import 'package:youtube_player_flutter/youtube_player_flutter.dart'; 
 
 class VideoPlayerView extends StatefulWidget {
-  const VideoPlayerView({super.key, required this.videoModel});
-
-  final VideoModel videoModel;
+  final VideoModel video;
+  const VideoPlayerView({super.key, required this.video});
 
   @override
   State<VideoPlayerView> createState() => _VideoPlayerViewState();
 }
 
 class _VideoPlayerViewState extends State<VideoPlayerView> {
-  late FlickManager flickManager;
+  late YoutubePlayerController _controller;
+
   @override
   void initState() {
     super.initState();
-    flickManager = FlickManager(
-      videoPlayerController:
-          VideoPlayerController.networkUrl(
-              Uri.parse(widget.videoModel.videoUrl),
-            )
-            ..initialize().then((value) {
-              setState(() {});
-            }),
+    _controller = YoutubePlayerController(
+      initialVideoId: widget.video.videoUrl,
+      flags: const YoutubePlayerFlags(
+        autoPlay: true, 
+        mute: false,
+      ),
     );
   }
 
   @override
   void dispose() {
-    flickManager.dispose();
+    _controller.dispose();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final controller = flickManager.flickVideoManager!.videoPlayerController;
-    return Scaffold(
-      appBar: AppBar(
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back_ios),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              centerTitle: true,
-              iconTheme: const IconThemeData(color: Colors.white),
-              title: Text(
-                widget.videoModel.title,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
+    return YoutubePlayerBuilder(
+      player: YoutubePlayer(
+        controller: _controller,
+        showVideoProgressIndicator: true,
+        progressIndicatorColor: Colors.red,
+        progressColors: const ProgressBarColors(
+          playedColor: Colors.red,
+          handleColor: Colors.redAccent,
+        ),
+      ),
+      builder: (context, player) {
+        return Scaffold(
+          backgroundColor: AppColors.primaryDark,
+          appBar: AppBar(
+            backgroundColor: AppColors.primaryDark,
+            iconTheme: const IconThemeData(color: Colors.white),
+            title:  Text(
+              widget.video.title,
+              style: TextStyle(color: Colors.white, fontSize: 18),
             ),
-      backgroundColor: AppColors.primaryDark,
-      body: controller == null || !controller.value.isInitialized
-          ? const Center(child: CircularProgressIndicator())
-          : controller.value.hasError
-          ? Center(child: Text('Oops! Please try again.'))
-          : Center(
-            child: AspectRatio(
-                aspectRatio: controller.value.aspectRatio,
-                child: FlickVideoPlayer(flickManager: flickManager),
-              ),
           ),
+          body: Center(child: player),
+        );
+      },
     );
   }
 }

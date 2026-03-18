@@ -36,7 +36,7 @@ abstract class AppRouter {
       final videpModel = settings.arguments as VideoModel;
         return MaterialPageRoute(
           builder: (context) {
-            return VideoPlayerView(videoModel: videpModel);
+            return VideoPlayerView(video: videpModel);
           },
         );
 

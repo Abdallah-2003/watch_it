@@ -5,7 +5,6 @@ import 'package:watch_it/features/splash/presentation/views/widgets/splash_logo.
 import 'package:watch_it/features/splash/presentation/views/widgets/splash_sub_title.dart';
 import 'package:watch_it/features/splash/presentation/views/widgets/splash_title.dart';
 
-
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
 
@@ -14,14 +13,18 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
-
   @override
   void initState() {
     Future.delayed(Duration(seconds: 2), () {
-      Navigator.pushNamed(context, AppRoutes.layoutView);
-    },);
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        AppRoutes.layoutView,
+        (route) => false,
+      );
+    });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,10 +32,7 @@ class _SplashViewState extends State<SplashView> {
         width: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              AppColors.primaryDark,
-              AppColors.secondaryDark,
-            ],
+            colors: [AppColors.primaryDark, AppColors.secondaryDark],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),

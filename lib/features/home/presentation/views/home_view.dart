@@ -20,11 +20,10 @@ class HomeView extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: AppColors.cardDark,
               centerTitle: false,
-              titleSpacing: 0,
               title: Row(
                 children: [
                   Text(
-                    'Watch ',
+                    'Watch',
                     style: TextStyle(
                       color: AppColors.white,
                       fontWeight: FontWeight.bold,
